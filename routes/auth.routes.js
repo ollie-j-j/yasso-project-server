@@ -75,30 +75,31 @@ router.post("/signup", (req, res, next) => {
 });
 
 // POST  /auth/login - Verifies email and password and returns a JWT
-router.post("/login", (req, res, next) => {
-  const { username, email, password } = req.body;
+router.post("/signin", (req, res, next) => {
+  const { identifier, password } = req.body;
 
   // Check if email or password are provided as empty string
-  if (username === "" || email === "" || password === "") {
-    res.status(400).json({ message: "provide username, email and password." });
+  if (identifier === "" || password === "") {
+    res.status(400).json({ message: "provide username or email and password." });
     return;
   }
 
-  // Check the users collection if a user with the same email exists
-  User.findOne({ email })
-    .then((foundUser) => {
-      if (!foundUser) {
-        // If the user is not found, send an error response
+  // Check the users collection if a user with the same email or username exists
+  const query = isValidEmail(identifier) ? { email: identifier } : { username: identifier };
+
+  User.findOne(query)
+    .then(user => {
+      if (!user) {
         res.status(401).json({ message: "user not found." });
         return;
       }
 
       // Compare the provided password with the one saved in the database
-      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
+      const passwordCorrect = bcrypt.compareSync(password, user.password);
 
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
-        const { _id, email, username } = foundUser;
+        const { _id, email, username } = user;
 
         // Create an object that will be set as the token payload
         const payload = { _id, email, username };

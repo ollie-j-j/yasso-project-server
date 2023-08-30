@@ -15,8 +15,8 @@ app.use("/auth", authRoutes);
 const userRoutes = require("./routes/user.routes");
 app.use("/api/users", userRoutes);
 
-// const originalTrainingPlanRoutes = require("./routes/originalTrainingPlan.routes");
-// app.use("/api/training/original", originalTrainingPlanRoutes);
+const originalTrainingPlanRoutes = require("./routes/originalTrainingPlan.routes");
+app.use("/api/training/original", originalTrainingPlanRoutes);
 
 // const dynamicTrainingPlanRoutes = require("./routes/dynamicTrainingPlan.routes");
 // app.use("/api/training/dynamic", dynamicTrainingPlanRoutes);

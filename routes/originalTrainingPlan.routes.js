@@ -7,7 +7,7 @@ router.post('/add-plan', isAuthenticated, (req, res) => {
     const userId = req.payload._id;
     const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } = req.body;
 
-    if (!userId || !monday || !tuesday || !wednesday || !thursday || !friday || !saturday || !sunday) {
+    if ( !monday || !tuesday || !wednesday || !thursday || !friday || !saturday || !sunday) {
         return res.status(400).json({ error: "All fields are required" });
     }
 

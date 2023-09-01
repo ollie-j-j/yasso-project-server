@@ -13,6 +13,15 @@ router.post('/add-plan', isAuthenticated, (req, res) => {
 
     const originalTrainingPlan = new OriginalTrainingPlan({
         userId,
+        originalPlan: {
+            monday,
+            tuesday,
+            wednesday,
+            thursday,
+            friday,
+            saturday,
+            sunday
+        },
         monday,
         tuesday,
         wednesday,

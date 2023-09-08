@@ -18,9 +18,6 @@ app.use("/api/users", userRoutes);
 const originalTrainingPlanRoutes = require("./routes/originalTrainingPlan.routes");
 app.use("/api/training/original", originalTrainingPlanRoutes);
 
-// const dynamicTrainingPlanRoutes = require("./routes/dynamicTrainingPlan.routes");
-// app.use("/api/training/dynamic", dynamicTrainingPlanRoutes);
-
 require("./error-handling")(app);
 
 module.exports = app;

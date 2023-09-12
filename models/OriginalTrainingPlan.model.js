@@ -21,7 +21,7 @@ const daySchema = new Schema({
   },
   sessionNotes: {
     type: String,
-    default: ''
+    default: ' '
   }
 });
 

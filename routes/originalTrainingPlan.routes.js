@@ -16,7 +16,7 @@ router.post('/add-plan', isAuthenticated, (req, res) => {
         return res.status(400).json({ error: "All fields are required" });
     }
 
-    const originalTrainingPlan = new OriginalTrainingPlan({
+    const originalTrainingPlan = {
         userId,
         originalPlan: {
             monday,
@@ -34,16 +34,18 @@ router.post('/add-plan', isAuthenticated, (req, res) => {
         friday,
         saturday,
         sunday
-    });
-
-    originalTrainingPlan.save()
+    };
+    OriginalTrainingPlan.create(originalTrainingPlan)
         .then(savedPlan => {
-            return User.findById(userId)
+            console.error("hello1");
+            User.findById(userId)
                 .then(user => {
+                    console.error("hello2");
                     user.originalTrainingPlan = savedPlan._id;
                     return user.save();
                 })
                 .then(() => {
+                    console.error("hello3");
                     res.status(201).json(savedPlan);
                 });
         })
@@ -52,7 +54,6 @@ router.post('/add-plan', isAuthenticated, (req, res) => {
             res.status(500).json({ error: "Error creating the training plan" });
         });
 });
-
 
 
 // GET - current plan

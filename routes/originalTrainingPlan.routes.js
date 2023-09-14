@@ -103,6 +103,8 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 //         });
 // });
 
+// sort out this file
+
 router.post('/add-plan', isAuthenticated, (req, res) => {
     const userId = req.payload._id;
     const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } = req.body;

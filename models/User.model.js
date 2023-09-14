@@ -22,6 +22,10 @@ const userSchema = new Schema(
       type: String,
       default: null
     },
+
+    // array of objects -> change the training plans
+
+    // change this - original plan, and updated plan
     originalTrainingPlan: {
       type: Schema.Types.ObjectId,
       ref: 'OriginalTrainingPlan',

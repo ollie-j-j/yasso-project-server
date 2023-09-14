@@ -13,6 +13,15 @@ const daySchema = new Schema({
   sessionDetails: {
     type: String,
     required: true
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'completed', 'missed'],
+    default: 'pending'
+  },
+  sessionNotes: {
+    type: String,
+    default: ' '
   }
 });
 
@@ -21,6 +30,15 @@ const originalTrainingPlanSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  originalPlan: {
+    monday: daySchema,
+    tuesday: daySchema,
+    wednesday: daySchema,
+    thursday: daySchema,
+    friday: daySchema,
+    saturday: daySchema,
+    sunday: daySchema,
   },
   monday: daySchema,
   tuesday: daySchema,

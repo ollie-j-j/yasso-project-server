@@ -136,12 +136,12 @@ router.post('/add-plan', isAuthenticated, (req, res) => {
     OriginalTrainingPlan.create(originalTrainingPlan)
         .then(savedPlan => {
             console.log("Plan saved"); 
-            return [savedPlan, User.findById(userId)];
+            return Promise.all([savedPlan, User.findById(userId)]);
         })
         .then(([savedPlan, user]) => {
             console.log("User fetched");
             user.originalTrainingPlan = savedPlan._id;
-            return [savedPlan, user.save()];
+            return Promise.all([savedPlan, user.save()]);
         })
         .then(([savedPlan]) => {
             console.log("User updated with plan");
